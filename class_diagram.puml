@@ -1,0 +1,45 @@
+@startuml composit_design_pattern
+
+class System
+{
+    System();
+}
+System-->FileSystem
+
+class FileSystem
+{
+    # name:string
+    # parent: FileSystem
+    + virtual open():void
+    + virtual close():void
+    + virtual  printLocation(string childTree):void
+    + virtual delete():void; 
+}
+
+class File
+{
+    
+    +File(name:string  ,parent:FileSystem ):void
+    +open(){override}:void
+    +delete(){override}:void
+    +close(){override}:void
+    +printLocation(){override}:string 
+    +isFile():bool
+
+}
+class Folder
+{
+    +dir():void
+    +folderContent[] : System
+    +folder(string Name):void
+    +open(){override}:void
+    +delete(){override}:void
+    +close(){override}:void
+    +add(Content: system);
+    +isFolder():bool
+    +printLocation(){override}:string 
+    +remove(Content: system);
+}
+FileSystem<|--File 
+FileSystem<|--Folder
+FileSystem<--o Folder
